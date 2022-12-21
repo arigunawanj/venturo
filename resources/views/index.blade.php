@@ -66,7 +66,7 @@
                                                 <td>{{ $item->menu }}</td>
                                                 @for ($i = 1; $i <= 12; $i++)
                                                     @if ($result[$item->menu][$i] == 0)
-                                                        <td></td>
+                                                        <td>-</td>
                                                     @else
                                                         <td>{{ number_format($result[$item->menu][$i], 0, ',', '.') }}</td>
                                                     @endif
@@ -89,7 +89,7 @@
                                                 <td>{{ $item->menu }}</td>
                                                 @for ($i = 1; $i <= 12; $i++)
                                                     @if ($result[$item->menu][$i] == 0)
-                                                        <td></td>
+                                                        <td>-</td>
                                                     @else
                                                         <td>{{ number_format($result[$item->menu][$i], 0, ',', '.') }}</td>
                                                     @endif
