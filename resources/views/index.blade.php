@@ -65,10 +65,16 @@
                                             <tr>
                                                 <td>{{ $item->menu }}</td>
                                                 @for ($i = 1; $i <= 12; $i++)
-                                                    <td>{{ $result[$item->menu][$i] }}</td>
+                                                    @if ($result[$item->menu][$i] == 0)
+                                                        <td></td>
+                                                    @else
+                                                        <td>{{ number_format($result[$item->menu][$i], 0, ',', '.') }}</td>
+                                                    @endif
                                                 @endfor
-                                                <td>{{ $jumlahmenu[$item->menu] }}</td>
-                                                </tr>
+                                                <td class="fw-bold">
+                                                    {{ number_format($jumlahmenu[$item->menu], 0, ',', '.') }}
+                                                </td>
+                                            </tr>
                                         @endif
                                     @endforeach
 
@@ -82,8 +88,15 @@
                                             <tr>
                                                 <td>{{ $item->menu }}</td>
                                                 @for ($i = 1; $i <= 12; $i++)
-                                                    <td>{{ $result[$item->menu][$i] }}</td>
+                                                    @if ($result[$item->menu][$i] == 0)
+                                                        <td></td>
+                                                    @else
+                                                        <td>{{ number_format($result[$item->menu][$i], 0, ',', '.') }}</td>
+                                                    @endif
                                                 @endfor
+                                                <td class="fw-bold">
+                                                    {{ number_format($jumlahmenu[$item->menu], 0, ',', '.') }}
+                                                </td>
                                             </tr>
                                         @endif
                                     @endforeach
@@ -91,11 +104,11 @@
                                 </tbody>
                                 <tfoot class="table-dark">
                                     <tr>
-                                        <td>Total</td>
+                                        <td class="fw-bold">Total</td>
                                         @for ($i = 1; $i <= 12; $i++)
-                                            <td>{{ $jumlah[$i] }}</td>
+                                            <td class="fw-bold">{{ number_format($jumlah[$i], 0, ',', '.') }}</td>
                                         @endfor
-                                        <td>{{ $nilai }}</td>
+                                        <td class="fw-bold">{{ number_format($nilai, 0, ',', '.') }}</td>
                                     </tr>
                                 </tfoot>
                             </table>
