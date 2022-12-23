@@ -58,6 +58,7 @@ class AwalController extends Controller
                 $jumlah[$dino] += $perbulan->total;
             }
 
+            
             // MENGAMBIL TOTAL TIAP MENU
             foreach ($hmenu as $permenu) {
                 $jumlahmenu[$permenu->menu] = 0;
@@ -68,20 +69,8 @@ class AwalController extends Controller
                 $jumlahmenu[$jmltrans->menu] += $jmltrans->total;
             }
 
-            
-            foreach($hmenu as $rinc){
-                for ($i=1; $i <= 12; $i++) { 
-                    $isian[$i] = 0;
-                }
-            }
 
-            foreach ($htransaksi as $det) {
-                $har = date('n', strtotime($det->tanggal));
-                $isian[$har] = $det->total;
-            }
-
-
-            return view('index', compact('tahun', 'hmenu', 'htransaksi', 'result', 'nilai', 'jumlah', 'jumlahmenu', 'isian'));
+            return view('index', compact('tahun', 'hmenu', 'htransaksi', 'result', 'nilai', 'jumlah', 'jumlahmenu'));
         } else {
             return redirect('/');
         }
