@@ -60,16 +60,66 @@
                                     </tr>
 
                                     {{-- ISI DATA HARGA MAKANAN SETIAP BULAN --}}
+                                    @php
+                                        $id = 0;
+                                    @endphp
                                     @foreach ($hmenu as $item)
                                         @if ($item->kategori == 'makanan')
                                             <tr>
                                                 <td>{{ $item->menu }}</td>
                                                 @for ($i = 1; $i <= 12; $i++)
+                                                    @php
+                                                        $id++;
+                                                    @endphp
                                                     @if ($result[$item->menu][$i] == 0)
-                                                        <td>-</td>
+                                                        <td data-bs-toggle="modal"
+                                                            data-bs-target="#makanan{{ $id }}">-</td>
                                                     @else
-                                                        <td>{{ number_format($result[$item->menu][$i], 0, ',', '.') }}</td>
+                                                        <td data-bs-toggle="modal"
+                                                            data-bs-target="#makanan{{ $id }}">
+                                                            {{ number_format($result[$item->menu][$i], 0, ',', '.') }}</td>
                                                     @endif
+                                                    {{-- MODAL DETAIL --}}
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="makanan{{ $id }}" tabindex="-1"
+                                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                                        Detail Harga Makanan</h1>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Menu : {{ $item->menu }} <br>
+                                                                    Harga Total : Rp
+                                                                    {{ number_format($result[$item->menu][$i], 0, ',', '.') }}
+
+                                                                    <hr>
+
+                                                                    Rincian Pesanan Bulan : <br>
+                                                                    @foreach ($htransaksi as $rincian)
+                                                                    @php
+                                                                        $z = date('n', strtotime($rincian->tanggal))
+                                                                    @endphp
+                                                                    
+                                                                        @if ($z == $i && $item->menu == $rincian->menu)
+                                                                            {{ $rincian->tanggal }} : {{ $rincian->total }}<br>
+                                                                        
+                                                                        @endif
+                                                                    @endforeach
+                                                                    <br>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-primary">Save
+                                                                        changes</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 @endfor
                                                 <td class="fw-bold">
                                                     {{ number_format($jumlahmenu[$item->menu], 0, ',', '.') }}
@@ -89,9 +139,10 @@
                                                 <td>{{ $item->menu }}</td>
                                                 @for ($i = 1; $i <= 12; $i++)
                                                     @if ($result[$item->menu][$i] == 0)
-                                                        <td>-</td>
+                                                        <td data-bs-toggle="modal" data-bs-target="#minuman">-</td>
                                                     @else
-                                                        <td>{{ number_format($result[$item->menu][$i], 0, ',', '.') }}</td>
+                                                        <td data-bs-toggle="modal" data-bs-target="#minuman">
+                                                            {{ number_format($result[$item->menu][$i], 0, ',', '.') }}</td>
                                                     @endif
                                                 @endfor
                                                 <td class="fw-bold">
