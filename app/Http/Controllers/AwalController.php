@@ -14,7 +14,8 @@ class AwalController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $tahun = '';
+        return view('index', compact('tahun'));
     }
 
     public function store(Request $request)
@@ -35,6 +36,9 @@ class AwalController extends Controller
             // MENGAMBIL MENU TOTAL TIAP BULAN
             foreach ($hmenu as $item) {
                 for ($i = 1; $i <= 12; $i++) {
+                    setlocale(LC_ALL, 'id-ID', 'id_ID');
+                    $bulann = strftime('%B', mktime(0, 0, 0, $i, 1));
+                    $title[$item->menu][$i] = "Detail Penjualan $item->menu bulan $bulann";
                     $result[$item->menu][$i] = 0;
                 }
             }
@@ -69,8 +73,15 @@ class AwalController extends Controller
                 $jumlahmenu[$jmltrans->menu] += $jmltrans->total;
             }
 
+            $data = [
+                'a' => $hmenu,
+                'b' => $htransaksi,
+                'c' => $jumlahmenu,
+                'd' => $jumlah,
+                'e' => $result,
+            ];
 
-            return view('index', compact('tahun', 'hmenu', 'htransaksi', 'result', 'nilai', 'jumlah', 'jumlahmenu'));
+            return view('index', compact('tahun', 'hmenu', 'htransaksi', 'result', 'nilai', 'jumlah', 'jumlahmenu','data','title'));
         } else {
             return redirect('/');
         }
