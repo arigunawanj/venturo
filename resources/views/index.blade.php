@@ -110,7 +110,7 @@
 
                                                                     {{-- Mengambil isi data transaksi --}}
                                                                     @foreach ($htransaksi as $rincian)
-
+                                                                    
                                                                     {{-- Translate Tanggal ke angka dari 1-12 --}}
                                                                         @php
                                                                             $z = date('n', strtotime($rincian->tanggal));
@@ -195,12 +195,13 @@
                                                                     {{ number_format($totals, 0, ',', '.') }}<br>
                                                                 @endif
                                                             @endforeach
+                                                            <hr>
+                                                            {{-- Hasil Total --}}
+                                                            Hasil Total : <span class="badge bg-primary">{{ number_format($jumlahmenu[$item->menu], 0, ',', '.') }}</span>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Save
-                                                                changes</button>
+                                                                data-bs-dismiss="modal">Tutup</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -272,8 +273,8 @@
 
                                                                         {{-- Jika tanggal yang ditranslate sama dengan looping dan menu json sama dengan menu transaksi json --}}
                                                                         @if ($z == $i && $item->menu == $deta->menu)
-                                                                            {{ $deta->tanggal }} : Rp
-                                                                            {{ number_format($deta->total, 0, ',', '.') }}<br>
+                                                                            Tanggal Transaksi : {{ $deta->tanggal }}<br>
+                                                                            Total Transaksi : {{ number_format($deta->total, 0, ',', '.') }}<br><br>
                                                                         @endif
 
                                                                     @endforeach
@@ -347,12 +348,13 @@
                                                                     {{ number_format($hasils, 0, ',', '.') }}<br>
                                                                 @endif
                                                             @endforeach
+                                                            <hr>
+                                                            {{-- Hasil Total --}}
+                                                            Hasil Total : <span class="badge bg-primary">{{ number_format($jumlahmenu[$item->menu], 0, ',', '.') }}</span>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Save
-                                                                changes</button>
+                                                                data-bs-dismiss="modal">Tutup</button>
                                                         </div>
                                                     </div>
                                                 </div>
